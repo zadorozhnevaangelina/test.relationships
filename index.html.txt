@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест: Готовы ли вы к здоровым отношениям?</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px 0;
+            background: linear-gradient(135deg, #ff6b35, #ff8f5a);
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 5px 20px rgba(255, 107, 53, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .question-container {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border: 1px solid #f0f0f0;
+        }
+        
+        .question {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #333;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .option {
+            background: #f8f8f8;
+            padding: 15px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-size: 1.1em;
+        }
+        
+        .option:hover {
+            background: #ff6b35;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+        
+        .option.selected {
+            background: #ff6b35;
+            color: white;
+            border-color: #ff6b35;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b35, #ff8f5a);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 4px;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: #ff6b35;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .result-container {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border: 1px solid #f0f0f0;
+        }
+        
+        .result-title {
+            font-size: 2.2em;
+            color: #ff6b35;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .result-description {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .psychological-analysis {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            text-align: left;
+            border-left: 4px solid #ff6b35;
+        }
+        
+        .analysis-section {
+            margin-bottom: 20px;
+        }
+        
+        .analysis-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #ff6b35;
+            margin-bottom: 10px;
+        }
+        
+        .analysis-text {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .consultation-offer {
+            background: linear-gradient(135deg, #ff6b35, #ff8f5a);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(255, 107, 53, 0.3);
+        }
+        
+        .consultation-offer h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        
+        .consultation-offer p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        .restart-btn {
+            background: #ffffff;
+            color: #ff6b35;
+            border: 2px solid #ff6b35;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            margin: 20px 10px 0 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .restart-btn:hover {
+            background: #ff6b35;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .question-container {
+                padding: 20px;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Тест готовности к отношениям</h1>
+            <p>Узнайте, насколько вы готовы к здоровым и гармоничным отношениям</p>
+        </div>
+        
+        <div id="test-container">
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+            
+            <div class="question-container" id="question-container">
+                <div class="question" id="question"></div>
+                <div class="options" id="options"></div>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" id="prevBtn" onclick="previousQuestion()">Назад</button>
+                <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">Далее</button>
+            </div>
+        </div>
+        
+        <div id="result-container" class="result-container hidden">
+            <h2 class="result-title" id="result-title"></h2>
+            <p class="result-description" id="result-description"></p>
+            
+            <div class="psychological-analysis" id="psychological-analysis">
+                <div class="analysis-section">
+                    <div class="analysis-title">Готовность к отношениям:</div>
+                    <div class="analysis-text" id="readiness-text"></div>
+                </div>
+                
+                <div class="analysis-section">
+                    <div class="analysis-title">Возможные проблемы:</div>
+                    <div class="analysis-text" id="problems-text"></div>
+                </div>
+                
+                <div class="analysis-section">
+                    <div class="analysis-title">Рекомендации:</div>
+                    <div class="analysis-text" id="recommendations-text"></div>
+                </div>
+            </div>
+            
+            <button class="restart-btn" onclick="restartTest()">Пройти тест заново</button>
+            
+            <div class="consultation-offer">
+                <h3>🎯 Специальное предложение</h3>
+                <p>Специально для вас в ближайшие 24 часа доступна <strong>первая консультация бесплатно!</strong> Получите персональный разбор ваших результатов и индивидуальные рекомендации от профессионального психолога.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Как вы относитесь к одиночеству?",
+                options: [
+                    { text: "Мне комфортно быть одной, я умею наслаждаться своим обществом", value: 3 },
+                    { text: "Иногда мне нравится побыть одной, но не долго", value: 2 },
+                    { text: "Я не люблю одиночество и стараюсь его избегать", value: 1 },
+                    { text: "Одиночество для меня невыносимо", value: 0 }
+                ]
+            },
+            {
+                question: "Как вы реагируете на конфликты в отношениях?",
+                options: [
+                    { text: "Спокойно обсуждаю проблемы и ищу компромиссы", value: 3 },
+                    { text: "Сначала расстраиваюсь, но потом стараюсь решить вопрос", value: 2 },
+                    { text: "Избегаю конфликтов или ухожу в себя", value: 1 },
+                    { text: "Часто срываюсь и говорю то, о чем потом сожалею", value: 0 }
+                ]
+            },
+            {
+                question: "Насколько вы знаете свои потребности и границы?",
+                options: [
+                    { text: "Хорошо понимаю себя и могу четко их озвучить", value: 3 },
+                    { text: "В целом понимаю, но иногда сомневаюсь", value: 2 },
+                    { text: "Часто не уверена в том, чего хочу", value: 1 },
+                    { text: "Обычно подстраиваюсь под других", value: 0 }
+                ]
+            },
+            {
+                question: "Как вы относитесь к прошлым отношениям?",
+                options: [
+                    { text: "Проанализировала опыт и извлекла уроки", value: 3 },
+                    { text: "В основном переработала, но иногда всплывают эмоции", value: 2 },
+                    { text: "Стараюсь не думать о прошлом", value: 1 },
+                    { text: "До сих пор болезненно переживаю расставания", value: 0 }
+                ]
+            },
+            {
+                question: "Как вы ведете себя в начале отношений?",
+                options: [
+                    { text: "Остаюсь собой и не спешу с выводами", value: 3 },
+                    { text: "Немного волнуюсь, но стараюсь быть естественной", value: 2 },
+                    { text: "Пытаюсь произвести лучшее впечатление", value: 1 },
+                    { text: "Сразу начинаю строить серьезные планы", value: 0 }
+                ]
+            },
+            {
+                question: "Насколько вы финансово независимы?",
+                options: [
+                    { text: "Полностью обеспечиваю себя и имею накопления", value: 3 },
+                    { text: "Зарабатываю на жизнь, но без больших излишков", value: 2 },
+                    { text: "Иногда нуждаюсь в помощи близких", value: 1 },
+                    { text: "Финансово зависима от других", value: 0 }
+                ]
+            },
+            {
+                question: "Как вы относитесь к личному пространству партнера?",
+                options: [
+                    { text: "Считаю это очень важным и уважаю границы", value: 3 },
+                    { text: "Понимаю важность, но иногда хочется быть ближе", value: 2 },
+                    { text: "Стараюсь понимать, но это дается с трудом", value: 1 },
+                    { text: "Хочу знать все и быть частью всех сфер жизни партнера", value: 0 }
+                ]
+            },
+            {
+                question: "Как вы проводите свободное время?",
+                options: [
+                    { text: "У меня есть хобби и интересы, которыми я увлечена", value: 3 },
+                    { text: "Есть несколько занятий, которые мне нравятся", value: 2 },
+                    { text: "Часто не знаю, чем заняться", value: 1 },
+                    { text: "Обычно жду, когда кто-то предложит планы", value: 0 }
+                ]
+            },
+            {
+                question: "Как вы справляетесь со стрессом?",
+                options: [
+                    { text: "У меня есть здоровые способы справляться со стрессом", value: 3 },
+                    { text: "Справляюсь, но иногда нужна поддержка", value: 2 },
+                    { text: "Часто чувствую себя перегруженной", value: 1 },
+                    { text: "Стресс сильно влияет на мое поведение", value: 0 }
+                ]
+            },
+            {
+                question: "Что для вас означают отношения?",
+                options: [
+                    { text: "Взаимное развитие и поддержка двух целостных личностей", value: 3 },
+                    { text: "Возможность разделить жизнь с близким человеком", value: 2 },
+                    { text: "Способ чувствовать себя нужной и любимой", value: 1 },
+                    { text: "Необходимость, чтобы чувствовать себя полноценной", value: 0 }
+                ]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let answers = [];
+        
+        const results = {
+            high: {
+                title: "Высокая готовность к отношениям",
+                description: "Вы демонстрируете зрелый подход к отношениям и хорошо подготовлены к здоровому партнерству.",
+                readiness: "Вы показываете высокий уровень эмоциональной зрелости и готовности к здоровым отношениям. У вас есть четкое понимание себя, своих потребностей и границ. Вы способны поддерживать баланс между близостью и независимостью.",
+                problems: "Возможная склонность к перфекционизму или слишком высокие стандарты к партнерам. Иногда может казаться, что вы недостаточно нуждаетесь в близости, что может создавать дистанцию.",
+                recommendations: "Продолжайте работать над собой и оставайтесь открытой к новому опыту. Помните, что идеальных людей не существует - важна совместимость и готовность к развитию вместе."
+            },
+            medium: {
+                title: "Средняя готовность к отношениям",
+                description: "У вас есть хорошая основа для отношений, но некоторые аспекты требуют дополнительной работы.",
+                readiness: "Вы находитесь на хорошем пути к здоровым отношениям. У вас есть базовое понимание себя и отношений, но некоторые области требуют развития. Вы способны к близости, но иногда неуверенность может влиять на ваши решения.",
+                problems: "Периодическая неуверенность в себе, склонность к сомнениям в отношениях. Возможны трудности с выражением потребностей или установлением границ. Иногда прошлый опыт может влиять на текущие отношения.",
+                recommendations: "Работайте над повышением самооценки и навыками коммуникации. Изучайте свои эмоциональные паттерны. Рассмотрите возможность психологической работы для проработки прошлого опыта."
+            },
+            low: {
+                title: "Низкая готовность к отношениям",
+                description: "Вам стоит поработать над собой перед тем, как строить серьезные отношения.",
+                readiness: "В данный момент вы не вполне готовы к здоровым отношениям. Возможно, есть неразрешенные внутренние конфликты или зависимости, которые могут негативно влиять на партнерство. Это нормально - многие проходят через такие периоды.",
+                problems: "Эмоциональная зависимость, страх одиночества, неясные границы, неразрешенные травмы прошлого. Возможна склонность к созависимым отношениям или избеганию близости. Недостаток понимания собственных потребностей.",
+                recommendations: "Сосредоточьтесь на работе с собой: изучите свои эмоциональные паттерны, работайте с психологом, развивайте независимость и самостоятельность. Важно научиться быть счастливой наедине с собой, прежде чем делиться этим счастьем с другим."
+            }
+        };
+
+        function showQuestion() {
+            const question = questions[currentQuestion];
+            document.getElementById('question').textContent = question.question;
+            
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                optionDiv.textContent = option.text;
+                optionDiv.onclick = () => selectOption(index, option.value);
+                optionsContainer.appendChild(optionDiv);
+            });
+            
+            updateProgress();
+            updateButtons();
+        }
+
+        function selectOption(index, value) {
+            answers[currentQuestion] = value;
+            
+            // Визуально показать выбранную опцию
+            const options = document.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            options[index].classList.add('selected');
+            
+            // Активировать кнопку "Далее"
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (answers[currentQuestion] === undefined) return;
+            
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+                
+                // Восстановить выбранную опцию
+                if (answers[currentQuestion] !== undefined) {
+                    const question = questions[currentQuestion];
+                    const selectedIndex = question.options.findIndex(opt => opt.value === answers[currentQuestion]);
+                    if (selectedIndex !== -1) {
+                        document.querySelectorAll('.option')[selectedIndex].classList.add('selected');
+                        document.getElementById('nextBtn').disabled = false;
+                    }
+                }
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+        }
+
+        function updateButtons() {
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+            document.getElementById('nextBtn').disabled = answers[currentQuestion] === undefined;
+            
+            if (currentQuestion === questions.length - 1) {
+                document.getElementById('nextBtn').textContent = 'Получить результат';
+            } else {
+                document.getElementById('nextBtn').textContent = 'Далее';
+            }
+        }
+
+        function showResult() {
+            const totalScore = answers.reduce((sum, score) => sum + score, 0);
+            const maxScore = questions.length * 3;
+            const percentage = (totalScore / maxScore) * 100;
+            
+            let resultType;
+            if (percentage >= 75) {
+                resultType = results.high;
+            } else if (percentage >= 45) {
+                resultType = results.medium;
+            } else {
+                resultType = results.low;
+            }
+            
+            document.getElementById('result-title').textContent = resultType.title;
+            document.getElementById('result-description').textContent = resultType.description;
+            document.getElementById('readiness-text').textContent = resultType.readiness;
+            document.getElementById('problems-text').textContent = resultType.problems;
+            document.getElementById('recommendations-text').textContent = resultType.recommendations;
+            
+            document.getElementById('test-container').classList.add('hidden');
+            document.getElementById('result-container').classList.remove('hidden');
+        }
+
+        function restartTest() {
+            currentQuestion = 0;
+            answers = [];
+            document.getElementById('test-container').classList.remove('hidden');
+            document.getElementById('result-container').classList.add('hidden');
+            showQuestion();
+        }
+
+        // Инициализация теста
+        showQuestion();
+    </script>
+</body>
+</html>
